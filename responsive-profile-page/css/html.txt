@@ -1,0 +1,183 @@
+html
+<!DOCTYPE html>
+<head>  
+<title>helloo</title>
+    <style type="text/css">
+	body{
+  		background: chartreuse;
+            }
+	h1{
+ 	        color: green;
+  	        font-family: cursive;
+	  }
+
+	h4{
+  	font-family: cursive;
+	}
+	h2{
+ 	 font-family: cursive;
+	}
+	canvas{
+ 	 height:500px;
+ 	 width:700px;
+ 	 border: 1pt solid green;
+	}
+    </style>
+    <script type="text/javascript">
+	var image=null;
+var imgcanvas;
+var imreset;
+ function upload(){
+ imgcanvas= document.getElementById("can");
+   var fileinput= document.getElementById("finput"); 
+  image=new SimpleImage(fileinput);
+  imreset=new SimpleImage(fileinput);
+  image.drawTo(imgcanvas);
+}
+
+function makegray(){ 
+  for(var pixel of image.values()){
+    var avg=(pixel.getRed()+pixel.getGreen()+pixel.getBlue())/3;
+    pixel.setRed(avg);
+    pixel.setGreen(avg);
+    pixel.setBlue(avg);
+  }
+ image.drawTo(imgcanvas);
+}
+
+function makesepia(){
+  for(var pixel of image.values()){
+    var avg=(pixel.getRed()+pixel.getGreen()+pixel.getBlue())/3;
+    pixel.setRed(avg+50);
+    pixel.setGreen(avg);
+   pixel.setBlue(avg-30);
+  }
+  image.drawTo(imgcanvas);
+}
+
+function rainbow(){
+  var h=image.getHeight();
+  for(var pixel of image.values()){
+    var y = pixel.getY();
+    var avg = (pixel.getRed()+pixel.getGreen()+pixel.getBlue())/3;
+    if(y<=h/7){
+      if (avg<128){  //red
+       pixel.setRed(avg*2);
+       pixel.setGreen(0);
+       pixel.setBlue(0);
+      }
+      else{
+       pixel.setRed(255);
+       pixel.setGreen(avg*2-255);
+       pixel.setBlue(avg*2-255);
+      }
+    }    
+    if(y<=2*h/7 && y>h/7){   //orange
+      if (avg<128){
+    pixel.setRed(avg*2);
+    pixel.setGreen(0.8*avg);
+    pixel.setBlue(0);
+      }
+      else{
+       pixel.setRed(255);
+       pixel.setGreen(1.2*avg-51);
+       pixel.setBlue(avg*2-255);
+      }
+    }    
+    if(y<=3*h/7 && y>2*h/7){  //yellow
+      if (avg<128){
+    pixel.setRed(avg*2);
+    pixel.setGreen(avg*2);
+    pixel.setBlue(0);
+      }
+      else{
+       pixel.setRed(255);
+       pixel.setGreen(255);
+       pixel.setBlue(avg*2-255);
+      }
+    }    
+    if(y<=4*h/7 && y>3*h/7){  //green
+      if (avg<128){
+    pixel.setRed(0);
+    pixel.setGreen(avg*2);
+    pixel.setBlue(0);
+      }
+      else{
+       pixel.setRed(avg*2-255);
+       pixel.setGreen(255);
+       pixel.setBlue(avg*2-255);
+      }
+    }    
+    if(y<=5*h/7 && y>4*h/7){  //blue
+      if (avg<128){
+    pixel.setRed(0);
+    pixel.setGreen(0);
+    pixel.setBlue(avg*2);
+      }
+      else{
+       pixel.setRed(avg*2-255);
+       pixel.setGreen(avg*2-255);
+       pixel.setBlue(255);
+      }
+    }    
+    if(y<=6*h/7 && y>5*h/7){  //indigo
+      if (avg<128){
+    pixel.setRed(0.8*avg);
+    pixel.setGreen(0);
+    pixel.setBlue(avg*2);
+      }
+      else{
+         pixel.setRed(1.2*avg-51);
+       pixel.setGreen(avg*2-255);
+       pixel.setBlue(255);
+      }
+    }    
+    if(y<=h && y>6*h/7){  //violet
+      if (avg<128){
+    pixel.setRed(1.6*avg);
+    pixel.setGreen(0);
+    pixel.setBlue(1.6*avg);
+      }
+      else{
+       pixel.setRed(0.4*avg+153);
+       pixel.setGreen(avg*2-255);
+       pixel.setBlue(0.4*avg+153);
+      }
+    }    
+  }
+  image.drawTo(imgcanvas);
+}
+
+function deleteFilter(){
+  imreset.drawTo(imgcanvas);
+}
+    </script>
+</head>
+<body>
+<script
+src="http://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+<h1>Веб-страничка Насти Корневой</h1>
+<h4>Здесь Вы можете загружать свои фотографии и применять к ним разные фильтры </h4>
+
+<canvas id="can"></canvas>
+<p>
+<h2>Загрузите свою фотографию:</h2>
+<input type = "file" multiple="false" accept="image/*" id="finput" onchange="upload()">
+<h2>Примените фильтры к фотографии:</h2>
+
+<input type = "button" value="Чёрно-белый" onclick="makegray()">
+
+<input type = "button" value="Сепия" onclick="makesepia()">
+
+
+<input type = "button" value="Радуга" onclick="rainbow()">
+
+
+<input type = "button" value="Сброс фильтра" onclick="deleteFilter()">
+
+
+
+<h3>Моя страничка вк </h3>
+<a href="https://vk.com/hedgehogelectro"> вот по этой ссылке </a>
+</body>
+</html>
