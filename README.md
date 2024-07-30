@@ -13,6 +13,7 @@ This project is a basic front-end design for a user profile page for a social me
 - `index.html`: HTML structure of the profile page.
 - `styles.css`: CSS styles for the profile page.
 
+  ![Profile Page](https://github.com/srijaaaaa/USER-PROFILE-/blob/main/Screenshot%201.png)
 ## Getting Started
 
 ### Prerequisites
